@@ -1,0 +1,138 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  ["Tak", "Långtidsverkande behandling mot påväxt. Besiktning av takpannor, ränndalar och hängrännor ingår."],
+  ["Fasad", "Tvättas fri från smuts, alger och mossa. En ren fasad ger ett välkomnande intryck och håller längre."],
+  ["Altan", "Skonsam tvätt inför olja, färg eller säsong. Rätt metod för träets skick och yta."],
+  ["Mark & mur", "Uppfarter, marksten, entréer och murar rengörs så helheten känns vårdad."],
+  ["Textil", "Möbler, mattor, bil, husvagn och husbil kan fräschas upp enligt offert."]
+];
+
+const steps = [
+  ["01", "Besiktning", "Vi går igenom yta, material, åtkomst och riskpunkter innan offert."],
+  ["02", "Fast pris", "Du får tydlig omfattning, tidplan och hjälp med ROT/RUT-underlag."],
+  ["03", "Rent avslut", "Vi skyddar detaljer, tvättar metodiskt och lämnar ytan redo att användas."]
+];
+---
+
+<Layout>
+  <nav class="nav" aria-label="Huvudnavigation">
+    <a class="mark" href="/">TB</a>
+    <div class="nav-links">
+      <a href="#tjanster">Tjänster</a>
+      <a href="#erbjudanden">Erbjudanden</a>
+      <a href="#kontakt">Offert</a>
+    </div>
+  </nav>
+
+  <main class="site-shell">
+    <section class="hero-grid" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Tvättbjörne / Mateo Jönsson</p>
+        <h1 id="hero-title">Proffs på tvätt av tak, fasad och uteytor.</h1>
+        <p class="hero-lead">
+          Tak, fasad, altan, mark, mur och textil. Trygg rengöring för
+          privatpersoner och företag.
+        </p>
+      </div>
+
+      <figure class="hero-photo">
+        <img src="/images/mat-hero.jpg" alt="Mateo från Tvättbjörne rengör ett hustak från marken" />
+        <figcaption>Specialrengöring med rätt metod för ytan.</figcaption>
+      </figure>
+
+      <a class="action-tile green" href="mailto:info@tvattbjorne.se?subject=Kostnadsfri offert">
+        <span>Kostnadsfri offert</span>
+        <strong>Få pris på ditt jobb idag</strong>
+      </a>
+
+      <a class="action-tile orange" href="#erbjudanden">
+        <span>ROT/RUT</span>
+        <strong>Vi hjälper dig med underlaget</strong>
+      </a>
+    </section>
+
+    <section class="offer-strip" id="erbjudanden" aria-labelledby="offers-title">
+      <div class="section-head">
+        <p class="eyebrow">Aktuella erbjudanden</p>
+        <h2 id="offers-title">Klara priser. Klart resultat.</h2>
+      </div>
+      <div class="offer-grid">
+        <article class="offer-card green">
+          <span>Erbjudande tak</span>
+          <p>Långtidsverkande behandling mot påväxt. Besiktning av takpannor, ränndalar och hängrännor.</p>
+          <strong>Från 6 900,-</strong>
+        </article>
+        <article class="offer-card orange">
+          <span>Erbjudande fasad</span>
+          <p>Fasad tvättas fri från smuts, alger och mossa. Tvätt av vindskivor ingår enligt offert.</p>
+          <strong>Från 4 900,-</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="proof-grid" aria-labelledby="proof-title">
+      <figure class="roof-photo">
+        <img src="/images/mat-roof.jpg" alt="Mateo tvättar takpannor med utrustning och säkerhetssele" />
+      </figure>
+      <div class="proof-copy">
+        <p class="eyebrow">Före / efter-känsla</p>
+        <h2 id="proof-title">Renare ytor syns direkt och håller längre.</h2>
+        <p>
+          Alger, mossa och smuts gör att ytor känns slitna i onödan. Tvättbjörne
+          väljer metod efter material, skyddar känsliga detaljer och arbetar med
+          tydlig kommunikation från offert till klart jobb.
+        </p>
+      </div>
+    </section>
+
+    <section class="services-section" id="tjanster" aria-labelledby="services-title">
+      <div class="section-head">
+        <p class="eyebrow">Tjänster</p>
+        <h2 id="services-title">Allt det viktiga runt huset.</h2>
+      </div>
+      <div class="service-list">
+        {
+          services.map(([title, body]) => (
+            <article class="service-card">
+              <span>{title}</span>
+              <p>{body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="quote-grid" aria-labelledby="about-title">
+      <p class="quote">"För mig är kunden alltid kung."</p>
+      <div>
+        <p class="eyebrow">Om Tvättbjörne</p>
+        <h2 id="about-title">Mateo Jönsson erbjuder specialrengöring med helhetsansvar.</h2>
+        <p>
+          Vi hjälper både privatpersoner och företag med tak, fasader, altaner,
+          marksten, murar och textilier. Målet är enkelt: komma i tid, göra rent,
+          hålla vad som lovats och lämna ett resultat kunden känner sig trygg med.
+        </p>
+      </div>
+    </section>
+
+    <section class="process-grid" aria-label="Så går det till">
+      {
+        steps.map(([number, title, body]) => (
+          <article>
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+
+  <footer class="contact" id="kontakt">
+    <span>Få en kostnadsfri offert idag</span>
+    <a href="tel:0730000000">073-00 00 00</a>
+    <a href="mailto:info@tvattbjorne.se">info@tvattbjorne.se</a>
+  </footer>
+</Layout>

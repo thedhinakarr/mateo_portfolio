@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node test/smoke.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.0.3",
+    "typescript": "^5.5.4"
+  }
+}
