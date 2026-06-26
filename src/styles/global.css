@@ -286,8 +286,7 @@ h2 {
 
 .proof-copy p:last-child,
 .quote-grid p:not(.quote):not(.eyebrow),
-.process-grid p,
-.service-card p {
+.process-grid p {
   color: var(--muted);
   font-size: 19px;
   line-height: 1.42;
@@ -298,10 +297,11 @@ h2 {
 }
 
 .service-card {
-  min-height: 220px;
-  padding: 20px;
+  min-height: 190px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
+  gap: 18px;
   border: 1px solid var(--line);
   background: var(--paper);
 }
@@ -311,8 +311,11 @@ h2 {
 }
 
 .service-card p {
-  margin-top: auto;
   margin-bottom: 0;
+  color: #3f433d;
+  font-size: clamp(15px, 1.05vw, 17px);
+  font-weight: 650;
+  line-height: 1.34;
 }
 
 .quote-grid {
