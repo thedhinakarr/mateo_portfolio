@@ -2,137 +2,250 @@
 import Layout from "../layouts/Layout.astro";
 
 const services = [
-  ["Tak", "Långtidsverkande behandling mot påväxt. Besiktning av takpannor, ränndalar och hängrännor ingår."],
-  ["Fasad", "Tvättas fri från smuts, alger och mossa. En ren fasad ger ett välkomnande intryck och håller längre."],
-  ["Altan", "Skonsam tvätt inför olja, färg eller säsong. Rätt metod för träets skick och yta."],
-  ["Mark & mur", "Uppfarter, marksten, entréer och murar rengörs så helheten känns vårdad."],
-  ["Textil", "Möbler, mattor, bil, husvagn och husbil kan fräschas upp enligt offert."]
+  ["01", "Takrengöring", "Långtidsverkande behandling mot påväxt, med besiktning av takpannor, ränndalar och hängrännor."],
+  ["02", "Fasadtvätt", "Rengöring av smuts, alger och mossa för ett renare och mer välkomnande intryck."],
+  ["03", "Altaner", "Tvätt och behandling anpassad efter altanens material, skick och kommande ytbehandling."],
+  ["04", "Uppfarter & marksten", "Rengöring och behandling med metod anpassad efter underlaget."],
+  ["05", "Murar & marksten", "Rengöring av påväxt och smuts för en mer vårdad helhet runt huset."],
+  ["06", "Textilrengöring", "Rengöring av bilklädsel, soffor, mattor och stolar. Metoden fungerar även för husvagn och husbil."]
 ];
 
 const steps = [
-  ["01", "Besiktning", "Vi går igenom yta, material, åtkomst och riskpunkter innan offert."],
-  ["02", "Fast pris", "Du får tydlig omfattning, tidplan och hjälp med ROT/RUT-underlag."],
-  ["03", "Rent avslut", "Vi skyddar detaljer, tvättar metodiskt och lämnar ytan redo att användas."]
+  ["01", "Offertförfrågan", "Maila med några rader om jobbet. Du får återkoppling så snart som möjligt."],
+  ["02", "Rätt metod", "Jag bedömer yta, material, åtkomst och vilken rengöring som passar uppdraget."],
+  ["03", "Som lovat", "Du blir nöjd."]
 ];
+
+const emailSubject = encodeURIComponent("Kostnadsfri offertförfrågan");
+const emailBody = encodeURIComponent(`Hej Mateo,
+
+Jag vill gärna få en kostnadsfri offert.
+
+Tjänst eller yta:
+Adress eller ort:
+Ungefärlig storlek:
+Önskad tid:
+
+Övrig information:
+
+Vänliga hälsningar,`);
+const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&body=${emailBody}`;
 ---
 
 <Layout>
-  <nav class="nav" aria-label="Huvudnavigation">
-    <a class="mark" href="/">TB</a>
-    <div class="nav-links">
-      <a href="#tjanster">Tjänster</a>
-      <a href="#erbjudanden">Erbjudanden</a>
-      <a href="#kontakt">Offert</a>
-    </div>
-  </nav>
+  <header class="site-header">
+    <nav class="nav section-shell" aria-label="Huvudnavigation">
+      <a class="brand" href="/" aria-label="Tvättbjörnen, startsida">
+        <img src="/images/raccoon-480.jpg" width="480" height="480" alt="" />
+        <span>Tvättbjörnen</span>
+      </a>
+      <div class="nav-links">
+        <a href="#tjanster">Tjänster</a>
+        <a href="#erbjudanden">Erbjudanden</a>
+        <a href="#om-mig">Om mig</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <a class="mobile-offer" href={offerEmailHref} target="_blank" rel="noopener noreferrer">Offert</a>
+    </nav>
+  </header>
 
-  <main class="site-shell">
-    <section class="hero-grid" aria-labelledby="hero-title">
+  <main>
+    <section class="hero section-shell" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">Tvättbjörne / Mateo Jönsson</p>
+        <p class="eyebrow">Mateo Jönsson / Tvättbjörnen</p>
         <h1 id="hero-title">Proffs på tvätt av tak, fasad och uteytor.</h1>
-        <p class="hero-lead">
-          Tak, fasad, altan, mark, mur och textil. Trygg rengöring för
-          privatpersoner och företag.
-        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href={offerEmailHref} target="_blank" rel="noopener noreferrer">
+            Få en kostnadsfri offert
+          </a>
+          <a class="button button-secondary" href="#tjanster">Se tjänster</a>
+        </div>
+        <ul class="credibility" aria-label="Därför väljer kunder Tvättbjörnen">
+          <li>Utbildad & certifierad</li>
+          <li>Metod efter material</li>
+        </ul>
       </div>
 
       <figure class="hero-photo">
-        <img src="/images/mat-hero.jpg" alt="Mateo från Tvättbjörne rengör ett hustak från marken" />
-        <figcaption>Specialrengöring med rätt metod för ytan.</figcaption>
+        <img
+          src="/images/mat-hero.jpg"
+          width="1800"
+          height="1350"
+          fetchpriority="high"
+          decoding="async"
+          alt="Mateo Jönsson från Tvättbjörnen rengör ett hustak från marken"
+        />
+        <figcaption>Specialrengöring för hem och företag</figcaption>
       </figure>
-
-      <a class="action-tile green" href="mailto:info@tvattbjorne.se?subject=Kostnadsfri offert">
-        <span>Kostnadsfri offert</span>
-        <strong>Få pris på ditt jobb idag</strong>
-      </a>
-
-      <a class="action-tile orange" href="#erbjudanden">
-        <span>ROT/RUT</span>
-        <strong>Vi hjälper dig med underlaget</strong>
-      </a>
     </section>
 
-    <section class="offer-strip" id="erbjudanden" aria-labelledby="offers-title">
-      <div class="section-head">
-        <p class="eyebrow">Aktuella erbjudanden</p>
-        <h2 id="offers-title">Klara priser. Klart resultat.</h2>
-      </div>
-      <div class="offer-grid">
-        <article class="offer-card green">
-          <span>Erbjudande tak</span>
-          <p>Långtidsverkande behandling mot påväxt. Besiktning av takpannor, ränndalar och hängrännor.</p>
-          <strong>Från 6 900,-</strong>
-        </article>
-        <article class="offer-card orange">
-          <span>Erbjudande fasad</span>
-          <p>Fasad tvättas fri från smuts, alger och mossa. Tvätt av vindskivor ingår enligt offert.</p>
-          <strong>Från 4 900,-</strong>
-        </article>
-      </div>
-    </section>
+    <section class="offer-section" id="erbjudanden" aria-labelledby="offers-title">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Aktuella erbjudanden</p>
+          <h2 id="offers-title">Tydliga priser, tydliga resultat.</h2>
+        </div>
 
-    <section class="proof-grid" aria-labelledby="proof-title">
-      <figure class="roof-photo">
-        <img src="/images/mat-roof.jpg" alt="Mateo tvättar takpannor med utrustning och säkerhetssele" />
-      </figure>
-      <div class="proof-copy">
-        <p class="eyebrow">Före / efter-känsla</p>
-        <h2 id="proof-title">Renare ytor syns direkt och håller längre.</h2>
-        <p>
-          Alger, mossa och smuts gör att ytor känns slitna i onödan. Tvättbjörne
-          väljer metod efter material, skyddar känsliga detaljer och arbetar med
-          tydlig kommunikation från offert till klart jobb.
+        <div class="offer-grid">
+          <article class="offer-card offer-green">
+            <p class="card-label">Erbjudande tak</p>
+            <p class="offer-body">
+              Långtidsverkande behandling mot påväxt. Besiktning av takpannor,
+              ränndalar och hängrännor. Byte av enstaka pannor vid behov. Gäller
+              takyta upp till 200 m². Efter ROT-avdrag.
+            </p>
+            <p class="offer-price"><span>Från</span><strong>4 900,-</strong></p>
+          </article>
+
+          <article class="offer-card offer-orange">
+            <p class="card-label">Erbjudande fasad</p>
+            <p class="offer-body">
+              Din fasad tvättas fri från smuts, alger och mossa. En ren fasad ger
+              ett välkomnande intryck och håller längre. Tvätt av vindskivor ingår.
+              Erbjudandet gäller enplanshus. Efter ROT-avdrag.
+            </p>
+            <p class="offer-price"><span>Från</span><strong>3 900,-</strong></p>
+          </article>
+        </div>
+
+        <p class="offer-note">
+          ROT-avdrag gäller arbetskostnaden när
+          <a
+            href="https://www.skatteverket.se/privat/fastigheterochbostad/rotarbeteochrutarbete/safungerarrotavdraget.4.5947400c11f47f7f9dd80004014.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Skatteverkets villkor</a>
+          är uppfyllda. Vi hjälper dig med underlaget.
         </p>
       </div>
     </section>
 
     <section class="services-section" id="tjanster" aria-labelledby="services-title">
-      <div class="section-head">
-        <p class="eyebrow">Tjänster</p>
-        <h2 id="services-title">Allt det viktiga runt huset.</h2>
-      </div>
-      <div class="service-list">
-        {
-          services.map(([title, body]) => (
-            <article class="service-card">
-              <span>{title}</span>
-              <p>{body}</p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Tjänster</p>
+          <h2 id="services-title">Allt det viktiga runt huset.</h2>
+        </div>
 
-    <section class="quote-grid" aria-labelledby="about-title">
-      <p class="quote">"För mig är kunden alltid kung."</p>
-      <div>
-        <p class="eyebrow">Om Tvättbjörne</p>
-        <h2 id="about-title">Mateo Jönsson erbjuder specialrengöring med helhetsansvar.</h2>
-        <p>
-          Vi hjälper både privatpersoner och företag med tak, fasader, altaner,
-          marksten, murar och textilier. Målet är enkelt: komma i tid, göra rent,
-          hålla vad som lovats och lämna ett resultat kunden känner sig trygg med.
+        <div class="service-grid">
+          {
+            services.map(([number, title, body]) => (
+              <article class="service-card">
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <p class="service-note">
+          Behöver du hjälp med andra jobb runt huset? Tveka inte att fråga.
         </p>
       </div>
     </section>
 
-    <section class="process-grid" aria-label="Så går det till">
-      {
-        steps.map(([number, title, body]) => (
-          <article>
-            <span>{number}</span>
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </article>
-        ))
-      }
+    <section class="sustainability" aria-labelledby="sustainability-title">
+      <div class="section-shell sustainability-grid">
+        <figure class="roof-photo">
+          <img
+            src="/images/mat-roof.jpg"
+            width="1350"
+            height="1800"
+            loading="lazy"
+            decoding="async"
+            alt="Mateo rengör takpannor med professionell utrustning och säkerhetssele"
+          />
+        </figure>
+        <div class="sustainability-copy">
+          <p class="eyebrow">Hållbarhet i praktiken</p>
+          <h2 id="sustainability-title">Rätt metod. Längre liv för ytan.</h2>
+          <p>
+            Min utbildning inom specialrengöring ligger till stor grund för mina
+            rengöringsmetoder. Jag anpassar arbetet efter material och skick för att
+            undvika onödigt slitage och skapa ett resultat som håller.
+          </p>
+          <p>
+            De metoder jag använder skadar inte dina ytor. Metoderna är hållbara
+            och oskadliga för både djur och människor.
+          </p>
+          <strong>Utbildad. Certifierad. Noggrann.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="om-mig" aria-labelledby="about-title">
+      <div class="section-shell about-grid">
+        <div class="about-intro">
+          <img
+            src="/images/raccoon-480.jpg"
+            width="480"
+            height="480"
+            loading="lazy"
+            decoding="async"
+            alt="Tvättbjörnens maskot med mopp och hink"
+          />
+          <p class="quote">“För mig är kunden alltid kung!”</p>
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">Om mig</p>
+          <h2 id="about-title">Kvalitet och kundnöjdhet går hand i hand.</h2>
+          <p>
+            Mitt namn är Mateo Jönsson och jag erbjuder tjänster till både
+            privatpersoner och företag, bland annat rengöring av tak, fasader,
+            altaner, marksten, murar och textilier.
+          </p>
+          <p>
+            Jag är utbildad och certifierad för alla mina tjänster. För mig är det
+            viktigt att du som kund blir nöjd med resultatet. Kvaliteten på mina
+            tjänster är det jag fokuserar mest på.
+          </p>
+          <p>
+            Det är viktigt för mig att underlätta så mycket som möjligt för kunden
+            och jag är alltid öppen för att specialanpassa mina tjänster efter kundens
+            behov. Oftast levererar jag helhetslösningar där jag tar hand om allt från
+            rengöring till ansökan om ROT-avdrag.
+          </p>
+          <strong>Jag ser till att leverera det som lovats och lite till.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section" aria-labelledby="process-title">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Så går det till</p>
+          <h2 id="process-title">Gör så här.</h2>
+        </div>
+        <div class="process-grid">
+          {
+            steps.map(([number, title, body]) => (
+              <article>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="kontakt" aria-labelledby="contact-title">
+      <div class="section-shell contact-grid">
+        <div>
+          <p class="eyebrow">Kontakt</p>
+          <h2 id="contact-title">Få en kostnadsfri offert idag.</h2>
+          <p>Berätta vad du vill ha rengjort, så återkommer jag med nästa steg.</p>
+        </div>
+        <div class="contact-links">
+          <a href={offerEmailHref} target="_blank" rel="noopener noreferrer">mateojonsson@outlook.com</a>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="contact" id="kontakt">
-    <span>Få en kostnadsfri offert idag</span>
-    <a href="tel:0730000000">073-00 00 00</a>
-    <a href="mailto:info@tvattbjorne.se">info@tvattbjorne.se</a>
+  <footer class="footer section-shell">
+    Tvättbjörnen · Mateo Jönsson · Specialrengöring för privatpersoner och företag
   </footer>
 </Layout>

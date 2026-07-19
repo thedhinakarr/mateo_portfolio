@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Tvättbjörne | Tak-, fasad- och altantvätt",
-  description = "Tvättbjörne erbjuder proffsig tvätt av tak, fasad, altan, mark, mur och textil med kostnadsfri offert."
+  title = "Tvättbjörnen | Specialrengöring av tak, fasad och uteytor",
+  description = "Tvättbjörnen erbjuder utbildad och certifierad specialrengöring av tak, fasad, altan, marksten, murar och textilier för privatpersoner och företag."
 } = Astro.props;
 ---
 
@@ -21,7 +21,8 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#2f9d46" />
+    <meta property="og:locale" content="sv_SE" />
+    <meta name="theme-color" content="#18733a" />
     <title>{title}</title>
   </head>
   <body>
