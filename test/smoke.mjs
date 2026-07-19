@@ -22,6 +22,7 @@ assert.match(page, /4 900,-/, "page should include the roof offer price");
 assert.match(page, /3 900,-/, "page should include the facade offer price");
 assert.match(page, /Utbildad och certifierad/i, "page should communicate Mateo's qualifications");
 assert.match(page, /Hållbarhet i praktiken/i, "page should include the sustainability section");
+assert.match(page, /Rätt metod\. Längre livslängd<br>för ytan\./i, "sustainability heading should break before för ytan");
 assert.match(page, /För mig är kunden alltid kung/i, "page should include the ad quote");
 assert.match(page, /mateojonsson@outlook\.com/i, "page should include the company email");
 assert.match(page, /Tydliga priser, tydliga resultat/i, "page should use the revised offer heading");
@@ -48,6 +49,7 @@ assert.doesNotMatch(page, /info@tvattbjorne\.se/i, "placeholder email must be re
 assert.doesNotMatch(page, /Klara priser\. Klart resultat/i, "old offer heading must be removed");
 assert.doesNotMatch(page, /ex måleri|så återkommer Mateo/i, "superseded copy must be removed");
 assert.doesNotMatch(page, /mossa/i, "facade copy should use påväxt instead of mossa");
+assert.doesNotMatch(page, /Längre liv för ytan/i, "old sustainability heading must be removed");
 assert.doesNotMatch(page, /I tid och som lovat/i, "removed hero proof must stay removed");
 assert.doesNotMatch(page, /Utbildad och certifierad specialrengöring för privatpersoner/i, "removed hero lead must stay removed");
 assert.match(css, /@media\s*\(max-width:\s*980px\)/, "tablet layout must be defined");
