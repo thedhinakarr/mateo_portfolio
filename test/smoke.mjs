@@ -47,6 +47,7 @@ assert.doesNotMatch(page, /079-351 59 89|tel:/i, "phone references must be remov
 assert.doesNotMatch(page, /info@tvattbjorne\.se/i, "placeholder email must be removed");
 assert.doesNotMatch(page, /Klara priser\. Klart resultat/i, "old offer heading must be removed");
 assert.doesNotMatch(page, /ex måleri|så återkommer Mateo/i, "superseded copy must be removed");
+assert.doesNotMatch(page, /mossa/i, "facade copy should use påväxt instead of mossa");
 assert.doesNotMatch(page, /I tid och som lovat/i, "removed hero proof must stay removed");
 assert.doesNotMatch(page, /Utbildad och certifierad specialrengöring för privatpersoner/i, "removed hero lead must stay removed");
 assert.match(css, /@media\s*\(max-width:\s*980px\)/, "tablet layout must be defined");
