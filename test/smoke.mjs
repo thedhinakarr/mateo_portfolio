@@ -26,6 +26,17 @@ assert.match(page, /Rätt metod\. Längre livslängd<br>för ytan\./i, "sustaina
 assert.match(page, /För mig är kunden alltid kung/i, "page should include the ad quote");
 assert.match(page, /mateojonsson@outlook\.com/i, "page should include the company email");
 assert.match(page, /Tydliga priser, tydliga resultat/i, "page should use the revised offer heading");
+const gallery = page.match(/<section\b[^>]*\bid="arbetsbilder"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? "";
+const photos = [...gallery.matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
+assert.equal(photos.length, 11, "gallery should contain the eleven selected work photos");
+const sources = photos.map(tag => {
+  assert.match(tag, /alt="[^"]+"/, "each work photo needs a description");
+  assert.match(tag, /srcset="[^"]+ 320w[^"]+"/, "each photo needs responsive sizes");
+  const src = tag.match(/\bsrc="([^"]+\.webp)"/)?.[1];
+  assert.ok(src && existsSync(`dist${src}`), "each photo must have a built WebP asset");
+  return src;
+});
+assert.equal(new Set(sources).size, photos.length, "work photos should be unique");
 for (const id of ["utomhustjanster", "fasadtvatt", "stadning", "bilvard"]) {
   assert.ok(page.includes(`href="#${id}"`) && page.includes(`<h3 id="${id}">`), `service link must lead to the ${id} heading`);
 }

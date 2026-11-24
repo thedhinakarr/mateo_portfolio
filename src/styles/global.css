@@ -247,11 +247,24 @@ h3 {
 }
 
 .hero-photo figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 16px;
   padding: 11px 14px;
   background: var(--orange);
   color: #fff;
   font: 850 12px/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   text-transform: uppercase;
+}
+
+.hero-photo figcaption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .offer-section,

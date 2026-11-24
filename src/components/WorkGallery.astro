@@ -1,0 +1,127 @@
+---
+import { Image } from "astro:assets";
+import deck from "../assets/tjanster/altan-maskin.jpg";
+import windowCorner from "../assets/tjanster/fonster-horn.jpg";
+import drawerHandles from "../assets/tjanster/kok-handtag.jpg";
+import gable from "../assets/tjanster/fasad-vindskiva.jpg";
+import glass from "../assets/tjanster/fonster-glas.jpg";
+import cupboards from "../assets/tjanster/kok-skapluckor.jpg";
+import boards from "../assets/tjanster/altan-trall.jpg";
+import frame from "../assets/tjanster/fonster-karm.jpg";
+import drawer from "../assets/tjanster/kok-ladfront.jpg";
+import squeegee from "../assets/tjanster/fonster-skrapa.jpg";
+import windowTop from "../assets/tjanster/fonster-overkant.jpg";
+
+const photos = [
+  { src: deck, service: "Altantvätt", caption: "Maskinskurning av trallen", alt: "En roterande borste arbetar in skum i trätrallen intill fasaden." },
+  { src: windowCorner, service: "Fönsterputs", caption: "Glasets övre hörn", alt: "Fönsterglaset bearbetas med ett handverktyg nära den övre karmen." },
+  { src: drawerHandles, service: "Köksrengöring", caption: "Runt lådornas handtag", alt: "En grön duk torkar runt ett metallhandtag på en vit kökslåda." },
+  { src: gable, service: "Fasadtvätt", caption: "Vindskivan på gaveln", alt: "Från marken når en långskaftad borste vindskivan på en vit trägavel." },
+  { src: glass, service: "Fönsterputs", caption: "Ett drag över rutan", alt: "En fönsterskrapa dras över det våta glaset." },
+  { src: cupboards, service: "Köksrengöring", caption: "Avtorkning av skåpluckor", alt: "En grön duk rengör en vit skåplucka ovanför köksbänken." },
+  { src: boards, service: "Altantvätt", caption: "Längs brädorna", alt: "En skurmaskin förs längs de våta brädorna på altanen." },
+  { src: frame, service: "Fönsterputs", caption: "Längs fönsterkarmen", alt: "En gul duk torkar den vita karmen mellan två fönsterrutor." },
+  { src: drawer, service: "Köksrengöring", caption: "Lådfronten på nära håll", alt: "En hand med grön mikrofiberduk torkar kökslådans front." },
+  { src: squeegee, service: "Fönsterputs", caption: "Skrapan mot glaset", alt: "En fönsterputsare för skrapan över glaset från insidan." },
+  { src: windowTop, service: "Fönsterputs", caption: "Avtorkning av överkanten", alt: "En gul duk följer fönstrets överkant intill persiennen." }
+];
+---
+
+<section class="gallery" id="arbetsbilder" aria-labelledby="gallery-title" aria-roledescription="bildkarusell">
+  <div class="section-shell">
+    <header class="gallery-heading">
+      <h2 id="gallery-title">Bilder från uppdragen</h2>
+      <div class="controls" hidden>
+        <output aria-live="polite" aria-atomic="true"></output>
+        <button type="button" data-step="-1" aria-label="Föregående bild" title="Föregående bild" aria-controls="gallery-track">←</button>
+        <button type="button" data-step="1" aria-label="Nästa bild" title="Nästa bild" aria-controls="gallery-track">→</button>
+      </div>
+    </header>
+    <div class="track" id="gallery-track" tabindex="0" role="group" aria-label="Arbetsbilder">
+      {photos.map(({ src, service, caption, alt }) => (
+        <figure style={`--ratio: ${src.width / src.height}`}>
+          <Image src={src} alt={alt} widths={[320, 480, 720, 960, Math.min(1280, src.width)]}
+            sizes="auto, (max-width: 620px) 90vw, (max-width: 980px) 55vw, 560px"
+            format="webp" quality={82} loading="lazy" decoding="async" />
+          <figcaption><span>{service}</span>{caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery { padding-block: 60px; border-block: 1px solid var(--line); background: var(--panel); }
+  .gallery-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 24px; margin-bottom: 24px; }
+  .gallery-heading h2 { max-width: 18ch; text-wrap: balance; }
+  .controls { display: flex; align-items: center; gap: 8px; }
+  .controls[hidden] { display: none; }
+  output { margin-inline-end: 8px; color: var(--muted); font: 700 14px/1.3 ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  button { width: 46px; height: 46px; padding: 0; border: 1px solid var(--green); background: transparent; color: var(--green); font: 26px/1 system-ui, sans-serif; cursor: pointer; }
+  button:hover:not([aria-disabled="true"]) { background: var(--green); color: white; }
+  button[aria-disabled="true"] { color: var(--muted); border-color: var(--line); cursor: default; }
+  :is(button, .track):focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+  .track {
+    --photo-height: clamp(280px, 54svh, 420px);
+    display: flex; align-items: end; gap: 16px;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    padding-bottom: 16px; scrollbar-color: var(--green) var(--paper); scrollbar-width: thin;
+  }
+  figure { flex: 0 0 min(calc(var(--photo-height) * var(--ratio)), 91%); min-width: 0; margin: 0; scroll-snap-align: start; }
+  figure img { width: 100%; height: auto; }
+  figcaption { margin-top: 12px; font-size: 18px; font-weight: 750; line-height: 1.3; }
+  figcaption span { display: block; margin-bottom: 4px; color: var(--green); font: 750 12px/1.4 ui-monospace, monospace; text-transform: uppercase; }
+  @media (max-width: 620px) {
+    .gallery { padding-block: 40px; }
+    .gallery-heading { align-items: center; }
+    .track { --photo-height: min(130vw, 58svh); gap: 12px; }
+    figcaption { font-size: 17px; }
+  }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>("#gallery-track")!;
+  const slides = Array.from(track.querySelectorAll("figure"));
+  const controls = document.querySelector<HTMLElement>("#arbetsbilder .controls")!;
+  const [prev, next] = controls.querySelectorAll("button");
+  const status = controls.querySelector("output")!;
+
+  function update() {
+    const { left, right } = track.getBoundingClientRect();
+    const visible = slides.filter(slide => {
+      const box = slide.getBoundingClientRect();
+      return Math.min(right, box.right) - Math.max(left, box.left) >= box.width / 2;
+    });
+    if (!visible.length) return;
+    const start = slides.indexOf(visible[0]) + 1;
+    const end = slides.indexOf(visible[visible.length - 1]) + 1;
+    const range = start === end ? `${start}` : `${start}–${end}`;
+    const label = `${range} av ${slides.length}`;
+    if (status.value !== label) status.value = label;
+    prev.setAttribute("aria-disabled", String(track.scrollLeft <= 2));
+    next.setAttribute("aria-disabled", String(track.scrollLeft >= track.scrollWidth - track.clientWidth - 2));
+  }
+
+  function go(step: number) {
+    const left = track.getBoundingClientRect().left;
+    const offsets = slides.map(slide => slide.getBoundingClientRect().left - left);
+    const movement = step > 0 ? offsets.find(x => x > 2) : offsets.reverse().find(x => x < -2);
+    track.scrollBy({ left: movement ?? step * track.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  }
+
+  for (const button of [prev, next]) {
+    button.addEventListener("click", () => {
+      if (button.getAttribute("aria-disabled") !== "true") go(Number(button.dataset.step));
+    });
+  }
+  track.addEventListener("keydown", event => {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      go(event.key === "ArrowLeft" ? -1 : 1);
+    }
+  });
+  track.addEventListener("scroll", update, { passive: true });
+  new ResizeObserver(update).observe(track);
+  controls.hidden = false;
+  update();
+</script>

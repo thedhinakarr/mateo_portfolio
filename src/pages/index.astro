@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import WorkGallery from "../components/WorkGallery.astro";
 
 const serviceGroups = [
   {
@@ -74,6 +75,7 @@ const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&
       </a>
       <div class="nav-links">
         <a href="#tjanster">Tjänster</a>
+        <a href="#arbetsbilder">Arbetsbilder</a>
         <a href="#erbjudanden">Erbjudanden</a>
         <a href="#om-mig">Om mig</a>
         <a href="#kontakt">Kontakt</a>
@@ -108,7 +110,7 @@ const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&
           decoding="async"
           alt="Mateo Jönsson från Tvättbjörnen rengör ett hustak från marken"
         />
-        <figcaption>Takrengöring från marken</figcaption>
+        <figcaption>Takrengöring från marken <a href="#arbetsbilder">Se arbetsbilder ↓</a></figcaption>
       </figure>
     </section>
 
@@ -140,6 +142,8 @@ const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&
         </div>
       </div>
     </section>
+
+    <WorkGallery />
 
     <section class="offer-section" id="erbjudanden" aria-labelledby="offers-title">
       <div class="section-shell">
