@@ -1,13 +1,46 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const services = [
-  ["01", "Takrengöring", "Långtidsverkande behandling mot påväxt, med besiktning av takpannor, ränndalar och hängrännor."],
-  ["02", "Fasadtvätt", "Rengöring av smuts, alger och påväxt för ett renare och mer välkomnande intryck."],
-  ["03", "Altaner", "Tvätt och behandling anpassad efter altanens material, skick och kommande ytbehandling."],
-  ["04", "Uppfarter & marksten", "Rengöring och behandling med metod anpassad efter underlaget."],
-  ["05", "Murar & marksten", "Rengöring av påväxt och smuts för en mer vårdad helhet runt huset."],
-  ["06", "Textilrengöring", "Rengöring av bilklädsel, soffor, mattor och stolar. Metoden fungerar även för husvagn och husbil."]
+const serviceGroups = [
+  {
+    id: "utomhustjanster", title: "Utomhustjänster",
+    sections: [
+      { heading: "Tak", items: [
+        ["Grönfri behandling", "Jag behandlar takpannorna mot alger och annan grön påväxt."],
+        ["Kontroll av takpannor", "Jag går igenom pannorna och visar dig om någon är sprucken eller har hamnat snett."],
+        ["Rensning av tak", "Jag tar bort löv, grenar och annat löst skräp från takytan och ränndalarna."],
+        ["Rensning av hängrännor", "Jag rensar rännorna så att regnvattnet kan rinna vidare till stuprören."]
+      ] },
+      { heading: "Altan och mark", items: [
+        ["Altantvätt", "Jag rengör trallen med en metod som passar träets skick och eventuell kommande ytbehandling."],
+        ["Marksten och murar", "Jag tvättar bort smuts och påväxt från uppfarter, gångar och murar."]
+      ] }
+    ]
+  },
+  {
+    id: "fasadtvatt", title: "Fasadtvätt",
+    sections: [{ items: [
+      ["Besiktning och pris på plats", "Jag tittar på fasadens material, skick och åtkomst hos dig. Vid besöket räknar jag ut priset för arbetet."],
+      ["Tvätt av fasaden", "Jag tvättar bort smuts och påväxt med en metod som passar fasadens ytskikt."],
+      ["Fönsterputs efter överenskommelse", "Vill du även ha fönstren putsade? Vid besöket går vi igenom vilka fönster som kan ingå i offerten."]
+    ] }]
+  },
+  {
+    id: "stadning", title: "Städning",
+    sections: [{ items: [
+      ["Flyttstädning", "Jag rengör alla rum inför överlämningen, från kök och badrum till sovrum och vardagsrum."],
+      ["Städning av lokaler", "Jag städar lokaler åt både företag och privatpersoner. Vi kommer överens om vilka rum och ytor som ska ingå."],
+      ["Bortforsling till återvinningscentral", "Jag hämtar det du vill bli av med och kör det till återvinningscentralen. Berätta vad som ska hämtas när du ber om offert."],
+      ["Textiltvätt", "Jag rengör soffor, stolar och mattor med en metod som passar tyget. Du kan också få hjälp med textilier i husvagn och husbil."]
+    ] }]
+  },
+  {
+    id: "bilvard", title: "Invändig bilvård",
+    sections: [{ items: [
+      ["Invändig rekond", "Jag rengör bilens kupé, från golv och mattor till paneler och andra invändiga ytor. Tjänsten gäller enbart bilens insida."],
+      ["Djuprengöring av tygsäten", "Med våtextraktion arbetar jag in rengöringsvätska i klädseln och suger sedan upp vätskan tillsammans med smutsen."]
+    ] }]
+  }
 ];
 
 const steps = [
@@ -53,7 +86,7 @@ const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&
     <section class="hero section-shell" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">Mateo Jönsson / Tvättbjörnen</p>
-        <h1 id="hero-title">Proffs på tvätt av tak, fasad och uteytor.</h1>
+        <h1 id="hero-title">Tak, fasad, städ och bilvård.</h1>
         <div class="hero-actions">
           <a class="button button-primary" href={offerEmailHref} target="_blank" rel="noopener noreferrer">
             Få en kostnadsfri offert
@@ -75,8 +108,37 @@ const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&
           decoding="async"
           alt="Mateo Jönsson från Tvättbjörnen rengör ett hustak från marken"
         />
-        <figcaption>Specialrengöring för hem och företag</figcaption>
+        <figcaption>Takrengöring från marken</figcaption>
       </figure>
+    </section>
+
+    <section class="services-section" id="tjanster" aria-labelledby="services-title">
+      <div class="section-shell service-directory">
+        <div class="service-index">
+          <h2 id="services-title">Tjänster</h2>
+          <nav aria-labelledby="services-title">
+            {serviceGroups.map(({ id, title }) => <a href={`#${id}`}>{title}<span aria-hidden="true">↓</span></a>)}
+          </nav>
+        </div>
+        <div class="service-list">
+          {serviceGroups.map(({ id, title, sections }) => (
+            <section class="service-group" aria-labelledby={id}>
+              <h3 id={id}>{title}</h3>
+              {sections.map((section) => (
+                <div class="service-block">
+                  {"heading" in section && <h4>{section.heading}</h4>}
+                  <dl>
+                    {section.items.map(([name, detail]) => (
+                      <div><dt>{name}</dt><dd>{detail}</dd></div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
+            </section>
+          ))}
+          <p class="service-note">Behöver du hjälp med andra jobb runt huset? Tveka inte att fråga.</p>
+        </div>
+      </div>
     </section>
 
     <section class="offer-section" id="erbjudanden" aria-labelledby="offers-title">
@@ -102,7 +164,7 @@ const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&
             <p class="offer-body">
               Din fasad tvättas fri från smuts, alger och påväxt. En ren fasad ger
               ett välkomnande intryck och håller längre. Tvätt av vindskivor ingår.
-              Erbjudandet gäller enplanshus. Efter ROT-avdrag.
+              Erbjudandet gäller enplanshus. Efter ROT-avdrag. Slutpriset räknas ut vid besiktning på plats.
             </p>
             <p class="offer-price"><span>Från</span><strong>3 900,-</strong></p>
           </article>
@@ -116,31 +178,6 @@ const offerEmailHref = `mailto:mateojonsson@outlook.com?subject=${emailSubject}&
             rel="noopener noreferrer"
           >Skatteverkets villkor</a>
           är uppfyllda. Vi hjälper dig med underlaget.
-        </p>
-      </div>
-    </section>
-
-    <section class="services-section" id="tjanster" aria-labelledby="services-title">
-      <div class="section-shell">
-        <div class="section-heading">
-          <p class="eyebrow">Tjänster</p>
-          <h2 id="services-title">Allt det viktiga runt huset.</h2>
-        </div>
-
-        <div class="service-grid">
-          {
-            services.map(([number, title, body]) => (
-              <article class="service-card">
-                <span>{number}</span>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </article>
-            ))
-          }
-        </div>
-
-        <p class="service-note">
-          Behöver du hjälp med andra jobb runt huset? Tveka inte att fråga.
         </p>
       </div>
     </section>

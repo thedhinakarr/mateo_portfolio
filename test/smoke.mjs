@@ -26,6 +26,9 @@ assert.match(page, /Rätt metod\. Längre livslängd<br>för ytan\./i, "sustaina
 assert.match(page, /För mig är kunden alltid kung/i, "page should include the ad quote");
 assert.match(page, /mateojonsson@outlook\.com/i, "page should include the company email");
 assert.match(page, /Tydliga priser, tydliga resultat/i, "page should use the revised offer heading");
+for (const id of ["utomhustjanster", "fasadtvatt", "stadning", "bilvard"]) {
+  assert.ok(page.includes(`href="#${id}"`) && page.includes(`<h3 id="${id}">`), `service link must lead to the ${id} heading`);
+}
 assert.match(page, /Behöver du hjälp med andra jobb runt huset\? Tveka inte att fråga\./i, "page should use the revised service note");
 assert.match(page, /så återkommer jag med nästa steg/i, "page should use first-person contact copy");
 assert.match(page, /Metoderna är hållbara/i, "page should use the revised sustainability wording");
