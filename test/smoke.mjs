@@ -28,7 +28,7 @@ assert.match(page, /mateojonsson@outlook\.com/i, "page should include the compan
 assert.match(page, /Tydliga priser, tydliga resultat/i, "page should use the revised offer heading");
 const gallery = page.match(/<section\b[^>]*\bid="arbetsbilder"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? "";
 const photos = [...gallery.matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
-assert.equal(photos.length, 11, "gallery should contain the eleven selected work photos");
+assert.equal(photos.length, 10, "gallery should contain the ten selected work photos");
 const sources = photos.map(tag => {
   assert.match(tag, /alt="[^"]+"/, "each work photo needs a description");
   assert.match(tag, /srcset="[^"]+ 320w[^"]+"/, "each photo needs responsive sizes");
